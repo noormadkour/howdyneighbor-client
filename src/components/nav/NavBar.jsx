@@ -7,7 +7,7 @@ export const NavBar = () => {
       <div className="navbar-item flex flex-row justify-around">
         <li className="navbar__item">
           <NavLink
-            className="text-left underline text-blue-600 hover:text-purple-700"
+            className="text-left  text-white hover:text-purple-700"
             to={"/"}
           >
             Home
@@ -15,7 +15,7 @@ export const NavBar = () => {
         </li>
         <li className="navbar__item">
           <NavLink
-            className="text-left underline text-blue-600 hover:text-purple-700"
+            className="text-left  text-white hover:text-purple-700"
             to={"/posts"}
           >
             Posts
@@ -23,7 +23,7 @@ export const NavBar = () => {
         </li>
         <li className="navbar__item">
           <NavLink
-            className="text-left underline text-blue-600 hover:text-purple-700"
+            className="text-left  text-white hover:text-purple-700"
             to={"/profile"}
           >
             Profile
@@ -31,7 +31,7 @@ export const NavBar = () => {
         </li>
         <li className="navbar__item">
           <NavLink
-            className="text-left underline text-blue-600 hover:text-purple-700"
+            className="text-left  text-white hover:text-purple-700"
             to={"/settings"}
           >
             Settings
@@ -40,7 +40,7 @@ export const NavBar = () => {
         {localStorage.getItem("current_user") !== null ? (
           <li className="navbar__item">
             <button
-              className="underline text-blue-600 hover:text-purple-700"
+              className=" text-white hover:text-purple-700"
               onClick={() => {
                 localStorage.removeItem("current_user");
                 navigate("/login");
@@ -51,22 +51,6 @@ export const NavBar = () => {
           </li>
         ) : (
           <>
-            <li className="navbar__item">
-              <NavLink
-                className="text-left underline text-blue-600 hover:text-purple-700"
-                to={"/login"}
-              >
-                Login
-              </NavLink>
-            </li>
-            <li className="navbar__item">
-              <NavLink
-                className="text-left underline text-blue-600 hover:text-purple-700"
-                to={"/register"}
-              >
-                Register
-              </NavLink>
-            </li>
           </>
         )}
       </div>
