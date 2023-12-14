@@ -57,7 +57,7 @@ export const PostForm = () => {
     const postBody = {
       ...post,
       categories: Array.from(chosenCategories),
-      accept_rsvp: post.post_type === "YourEventPostTypeId", // Replace with actual ID
+      accept_rsvp: post.post_type == 3, // Replace with actual ID
     };
 
     // Fetch request options
