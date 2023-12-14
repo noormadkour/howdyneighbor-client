@@ -11,7 +11,7 @@ export const PostForm = () => {
     post_type: 0,
     title: "",
     publication_date: new Date(),
-    event_date: new Date(),
+    event_date: null,
     image_url: "",
     content: "",
     approved: true,
@@ -152,7 +152,6 @@ export const PostForm = () => {
               id="image_url"
               onChange={updatePost}
               value={post.image_url}
-              required
             />
           </div>
 
