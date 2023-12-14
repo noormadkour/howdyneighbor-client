@@ -6,6 +6,55 @@ body {
   background-color: rgb(0, 92, 0);
 }
 
+@layer utilities {
+  .custom-shadow {
+    box-shadow: 0px 0px 20px rgb(0, 26, 2); /* Adjust the values as needed */
+  }
+}
+
+@layer utilities {
+  .custom-border-radius {
+    border-radius: 100px; /* Example value, adjust as needed */
+  }
+}
+
+@layer utilities {
+  .button-style {
+    background-color: white; /* Green background */
+    color: white; /* White text */
+    padding: 10px 20px; /* Padding around the text */
+    border: none; /* No border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Cursor changes to a hand symbol when hovered */
+    transition: background-color 0.3s; /* Smooth transition for background color */
+    font-size: 16px; /* Consistent font size */
+    line-height: 1.5; /* Consistent line height */
+    display: inline-block; /* Allows applying padding and height */
+    text-align: center; /* Center the text */
+    box-sizing: border-box; /* Consistent box sizing */
+    box-shadow: 1px 1px 1px black;
+  }
+
+  .submit-button {
+    background-color: #4CAF50; /* Green background */
+  }
+
+  .submit-button:hover {
+    background-color: #45a049; /* Darker green background on hover */
+    transform: scale(1.05);
+  }
+
+  .cancel-button {
+    background-color: #f44336; /* Red background */
+  }
+
+  .cancel-button:hover {
+    background-color: #d32f2f; /* Darker red background on hover */
+    transform: scale(1.05);
+  }
+}
+
+
 /* :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;

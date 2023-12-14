@@ -22,4 +22,3 @@ export const loginUser = (user) => {
       body: JSON.stringify(newUser),
     }).then((res) => res.json());
   };
-  

@@ -9,18 +9,34 @@ function App() {
     const storedUser = localStorage.getItem('current_user');
     return storedUser ? JSON.parse(storedUser) : null;
   });
-  
-
-  // const setToken = (newToken) => {
-  //   localStorage.setItem(JSON.parse('current_user'), newToken)
-  //   setTokenState(newToken)
-  // }
 
   const setUser = (newUser) => {
-    const parsedUser = JSON.parse(newUser);
-    localStorage.setItem('current_user', JSON.stringify(parsedUser));
-    setCurrentUser(parsedUser);
+    // newUser is now expected to be an object, not a string
+    localStorage.setItem('current_user', JSON.stringify(newUser));
+    setCurrentUser(newUser);
   }
+
+  // const setUser = (newUser) => {
+  //   const parsedUser = JSON.parse(newUser);
+  //   localStorage.setItem('current_user', JSON.stringify(parsedUser));
+  //   setCurrentUser(parsedUser);
+  // }
+
+  // const setUser = (userData) => {
+  //   let parsedUser;
+    
+  //   // Check if userData is a string or an object
+  //   if (typeof userData === 'string') {
+  //     // Parse it if it's a string
+  //     parsedUser = JSON.parse(userData);
+  //   } else {
+  //     // Use it directly if it's already an object
+  //     parsedUser = userData;
+  //   }
+  
+  //   localStorage.setItem('current_user', JSON.stringify(parsedUser));
+  //   setCurrentUser(parsedUser);
+  // }
   
 
   return (
