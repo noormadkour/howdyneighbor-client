@@ -7,6 +7,8 @@ import { Posts } from "../pages/Posts";
 import { Profile } from "../pages/Profile";
 import { Settings } from "../pages/Settings";
 import { PostForm } from "../components/forms/PostForm";
+import { PostDetails } from "../pages/PostDetails";
+// import { EditPost } from "../components/forms/EditPostForm";
 
 export const ApplicationViews = ({ currentUser, setUser }) => {
   return (
@@ -18,8 +20,22 @@ export const ApplicationViews = ({ currentUser, setUser }) => {
           <Route element={<Authorized currentUser={currentUser} />}>
             {/* Add Routes here */}
             <Route path="/" element={<Home currentUser={currentUser} />} />
-            <Route path="/posts" element={<Posts currentUser={currentUser} />} />
-            <Route path="/new-post" element={<PostForm currentUser={currentUser} />} />
+            <Route
+              path="/posts"
+              element={<Posts currentUser={currentUser} />}
+            />
+            <Route
+              path="/posts/:postId"
+              element={<PostDetails currentUser={currentUser} />}
+            />
+            <Route
+              path="/new-post"
+              element={<PostForm currentUser={currentUser} />}
+            />
+            {/* <Route
+              path="/edit-post/:postId"
+              element={<EditPost currentUser={currentUser} />}
+            /> */}
             <Route
               path="/profile"
               element={<Profile currentUser={currentUser} />}

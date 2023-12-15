@@ -16,9 +16,9 @@ export const Login = ({ setUser }) => {
       password: password.current.value,
     };
 
-    loginUser(user).then((res) => {
-      if ("token" in res && res.token) {
-        setUser(res);
+    loginUser(user).then((data) => {
+      if ("token" in data && data.token) {
+        setUser(data);
         navigate("/");
       } else {
         setIsUnsuccessful(true);

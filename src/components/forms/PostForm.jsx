@@ -90,7 +90,7 @@ export const PostForm = () => {
 
   return (
     <main className="container mx-auto pt-10 flex justify-center">
-      <div className="bg-white rounded-lg shadow-lg p-8 w-full max-w-xl">
+      <div className="bg-white custom-border-radius shadow-lg p-8 w-full max-w-xl">
         <form className="space-y-4" onSubmit={handleSubmit}>
           <h1 className="text-2xl font-bold text-center mb-6">New Post Form</h1>
 
@@ -176,7 +176,7 @@ export const PostForm = () => {
             <label className="block text-md font-medium text-gray-700">
               Categories
             </label>
-            <div className="flex flex-wrap gap-2 mt-2">
+            <div className="flex flex-wrap justify-between gap-2 mt-2">
               {categories.map((c) => (
                 <label key={c.id} className="flex items-center space-x-2">
                   <input
@@ -190,7 +190,7 @@ export const PostForm = () => {
             </div>
           </div>
 
-          <div className="flex justify-between mt-6">
+          <div className="flex justify-around mt-6 p-3">
             <button
               className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               type="submit"
