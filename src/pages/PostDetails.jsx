@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   getPostById,
   getComments,
@@ -7,10 +7,12 @@ import {
   updatePost,
   editComment,
   deleteComment,
+  deletePost,
 } from "../services/postService";
 import { EditPost } from "../components/forms/EditPostForm";
 
 export const PostDetails = ({ currentUser }) => {
+  const navigate = useNavigate();
   const [post, setPost] = useState(null);
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
@@ -60,7 +62,6 @@ export const PostDetails = ({ currentUser }) => {
 
   const handleEdit = () => {
     setIsEditing(true);
-    // navigate(`/edit-post/${postId}`);
   };
 
   const handleSaveEdit = async (editedPost) => {
@@ -75,8 +76,19 @@ export const PostDetails = ({ currentUser }) => {
     }
   };
 
-  const handleDelete = () => {
-    // Add logic to delete post
+  const handleDelete = async () => {
+    const confirmDelete = window.confirm("Are you sure you want to delete this post?");
+    if (confirmDelete) {
+      try {
+        await deletePost(postId);
+        // After successful deletion, navigate back to the posts list or home page
+        navigate('/posts'); // Uncomment and use React Router's navigate
+        // Or trigger some state change to indicate that the post has been deleted
+      } catch (error) {
+        console.error("Error deleting post:", error);
+        // Handle error (e.g., show a message to the user)
+      }
+    }
   };
 
   const handleEditCommentClick = (comment) => {
@@ -176,7 +188,7 @@ export const PostDetails = ({ currentUser }) => {
                 ></textarea>
                 <button
                   onClick={() => handleSaveEditComment(comment)}
-                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2"
+                  className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-2"
                 >
                   <i className="fas fa-check"></i>
                 </button>
@@ -224,7 +236,7 @@ export const PostDetails = ({ currentUser }) => {
           ></textarea>
           <button
             type="submit"
-            className="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            className="mt-2 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
           >
             Post Comment
           </button>

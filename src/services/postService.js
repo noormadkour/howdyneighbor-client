@@ -27,6 +27,20 @@ export const updatePost = (updatedPost) => {
   }
 };
 
+export const deletePost = (postId) => {
+  const currentUser = JSON.parse(localStorage.getItem("current_user"));
+
+  if (currentUser && currentUser.token) {
+    return fetch(`http://localhost:8000/posts/${postId}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Token ${currentUser.token}`,
+        "Content-Type": "application/json",
+      },
+    });
+  }
+}
+
 export const getPostById = (postId) => {
   const currentUser = JSON.parse(localStorage.getItem("current_user"));
 
