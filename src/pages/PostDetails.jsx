@@ -19,6 +19,7 @@ export const PostDetails = ({ currentUser }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editingCommentId, setEditingCommentId] = useState(null);
   const [editingContent, setEditingContent] = useState("");
+  const [showDeleteDialog, setShowDeleteDialog] = useState(false);
   const { postId } = useParams();
 
   const fetchComments = async () => {
@@ -76,23 +77,6 @@ export const PostDetails = ({ currentUser }) => {
     }
   };
 
-  const handleDelete = async () => {
-    const confirmDelete = window.confirm(
-      "Are you sure you want to delete this post?"
-    );
-    if (confirmDelete) {
-      try {
-        await deletePost(postId);
-        // After successful deletion, navigate back to the posts list or home page
-        navigate("/posts"); // Uncomment and use React Router's navigate
-        // Or trigger some state change to indicate that the post has been deleted
-      } catch (error) {
-        console.error("Error deleting post:", error);
-        // Handle error (e.g., show a message to the user)
-      }
-    }
-  };
-
   const handleEditCommentClick = (comment) => {
     setEditingCommentId(comment.id);
     setEditingContent(comment.content);
@@ -126,6 +110,42 @@ export const PostDetails = ({ currentUser }) => {
     return comment.is_owner || currentUser.admin;
   };
 
+  const handleDelete = () => {
+    setShowDeleteDialog(true);
+  };
+
+  const confirmDelete = async () => {
+    try {
+      await deletePost(postId);
+      navigate("/posts");
+      setShowDeleteDialog(false);
+    } catch (error) {
+      console.error("Error deleting post:", error);
+    }
+  };
+  
+  const closeDeleteDialog = () => {
+    setShowDeleteDialog(false);
+  };
+
+  const DeleteDialog = () => (
+    <div className="fixed inset-0 bg-gray-600 bg-opacity-75 flex justify-center items-center">
+      <div className="bg-white p-6 rounded shadow-lg">
+        <h3 className="text-lg font-bold mb-4">Confirm Deletion</h3>
+        <p>Are you sure you want to delete this post?</p>
+        <div className="mt-4 flex justify-end space-x-2">
+          <button onClick={confirmDelete} className="bg-red-500 hover:bg-red-700 text-white py-2 px-4 rounded">
+            Delete
+          </button>
+          <button onClick={closeDeleteDialog} className="bg-gray-500 hover:bg-gray-700 text-white py-2 px-4 rounded">
+            Cancel
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+  
+
   return (
     <div className="bg-white px-20 pt-5 pb-10 custom-border-radius shadow-lg my-6">
       <div className="flex justify-end space-x-2">
@@ -157,6 +177,8 @@ export const PostDetails = ({ currentUser }) => {
           </>
         )}
       </div>
+
+      {showDeleteDialog && <DeleteDialog />}
 
       {/* <h1 className="text-3xl font-extrabold mb-3">{post.title}</h1>
       <h2 className="text-xl mb-1 pb-4">{post.post_type.type}</h2>

@@ -1,27 +1,32 @@
 import { useState, useEffect } from 'react';
 import { getPosts } from '../../services/postService';
 import { useNavigate } from 'react-router-dom';
-import './EventCarousel.css'; // Create this new CSS file
+import './EventCarousel.css';
 
 export const EventCarousel = () => {
     const [events, setEvents] = useState([]);
-    const [currentIndex, setCurrentIndex] = useState(0);
     const EVENT_POST_TYPE_ID = 3; // The ID for Event post types
     const navigate = useNavigate();
 
     useEffect(() => {
         getPosts().then((fetchedPosts) => {
-            const eventPosts = fetchedPosts.filter(post => post.post_type.id === EVENT_POST_TYPE_ID);
+            const eventPosts = fetchedPosts.filter(
+                (post) => post.post_type.id === EVENT_POST_TYPE_ID
+            );
             setEvents(eventPosts);
         });
     }, []);
 
     const handleNext = () => {
-        setCurrentIndex((currentIndex + 1) % events.length);
+        const container = document.querySelector(".horizontal-scroll-container");
+        const itemWidth = container.querySelector(".event-item").offsetWidth;
+        container.scrollBy({ left: itemWidth, behavior: "smooth" });
     };
 
     const handlePrevious = () => {
-        setCurrentIndex((currentIndex - 1 + events.length) % events.length);
+        const container = document.querySelector(".horizontal-scroll-container");
+        const itemWidth = container.querySelector(".event-item").offsetWidth;
+        container.scrollBy({ left: -itemWidth, behavior: "smooth" });
     };
 
     return (
@@ -30,12 +35,18 @@ export const EventCarousel = () => {
             <div className="horizontal-scroll-container">
                 {events.length > 0 ? (
                     events.map((event, index) => (
-                        <div key={index} 
-                             className={`event-item ${index === currentIndex ? 'block' : 'hidden'}`} 
-                             onClick={() => navigate(`/posts/${event.id}`)}>
+                        <div
+                            key={index}
+                            className="event-item"
+                            onClick={() => navigate(`/posts/${event.id}`)}
+                        >
                             <h3 className="text-xl font-bold">{event.title}</h3>
-                            <p className="text-sm text-gray-600">Hosted by: {event.author.user.first_name} {event.author.user.last_name}</p>
-                            <p className="text-sm text-gray-500">Event on: {new Date(event.event_date).toLocaleDateString()}</p>
+                            <p className="text-sm text-gray-600">
+                                Hosted by: {event.author.user.first_name} {event.author.user.last_name}
+                            </p>
+                            <p className="text-sm text-gray-500">
+                                Event on: {new Date(event.event_date).toLocaleDateString()}
+                            </p>
                             <p className="text-gray-700">{event.content}</p>
                         </div>
                     ))
@@ -44,8 +55,12 @@ export const EventCarousel = () => {
                 )}
             </div>
             <div className="navigation-buttons">
-                <button onClick={handlePrevious}><i className="fas fa-arrow-left"></i></button>
-                <button onClick={handleNext}><i className="fas fa-arrow-right"></i></button>
+                <button onClick={handlePrevious} className="navigation-button">
+                    <i className="fas fa-arrow-left"></i>
+                </button>
+                <button onClick={handleNext} className="navigation-button">
+                    <i className="fas fa-arrow-right"></i>
+                </button>
             </div>
         </div>
     );
