@@ -37,10 +37,10 @@ export const EventCarousel = () => {
                     events.map((event, index) => (
                         <div
                             key={index}
-                            className="event-item"
+                            className="event-item flex flex-col p-3 h-[300px]"
                             onClick={() => navigate(`/posts/${event.id}`)}
                         >
-                            <h3 className="text-xl font-bold">{event.title}</h3>
+                            <h3 className="text-xl font-bold m-2 self-center">{event.title}</h3>
                             <p className="text-sm text-gray-600">
                                 Hosted by: {event.author.user.first_name} {event.author.user.last_name}
                             </p>
