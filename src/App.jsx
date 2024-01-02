@@ -15,30 +15,7 @@ function App() {
     localStorage.setItem('current_user', JSON.stringify(newUser));
     setCurrentUser(newUser);
   }
-
-  // const setUser = (newUser) => {
-  //   const parsedUser = JSON.parse(newUser);
-  //   localStorage.setItem('current_user', JSON.stringify(parsedUser));
-  //   setCurrentUser(parsedUser);
-  // }
-
-  // const setUser = (userData) => {
-  //   let parsedUser;
-    
-  //   // Check if userData is a string or an object
-  //   if (typeof userData === 'string') {
-  //     // Parse it if it's a string
-  //     parsedUser = JSON.parse(userData);
-  //   } else {
-  //     // Use it directly if it's already an object
-  //     parsedUser = userData;
-  //   }
   
-  //   localStorage.setItem('current_user', JSON.stringify(parsedUser));
-  //   setCurrentUser(parsedUser);
-  // }
-  
-
   return (
     <>
       {/* <NavBar token={token} setToken={setToken} /> */}

@@ -6,6 +6,12 @@ body {
   background-color: rgb(0, 92, 0);
 }
 
+body {
+  background: url('/public/howdy-neighbor-background.png') repeat;
+  /* background-size: cover; */
+  height: 1rem; /* Ensures full viewport height */
+}
+
 @layer utilities {
   .custom-shadow {
     box-shadow: 0px 0px 20px rgb(0, 26, 2); /* Adjust the values as needed */

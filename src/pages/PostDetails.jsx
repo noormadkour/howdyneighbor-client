@@ -77,12 +77,14 @@ export const PostDetails = ({ currentUser }) => {
   };
 
   const handleDelete = async () => {
-    const confirmDelete = window.confirm("Are you sure you want to delete this post?");
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this post?"
+    );
     if (confirmDelete) {
       try {
         await deletePost(postId);
         // After successful deletion, navigate back to the posts list or home page
-        navigate('/posts'); // Uncomment and use React Router's navigate
+        navigate("/posts"); // Uncomment and use React Router's navigate
         // Or trigger some state change to indicate that the post has been deleted
       } catch (error) {
         console.error("Error deleting post:", error);
@@ -125,29 +127,57 @@ export const PostDetails = ({ currentUser }) => {
   };
 
   return (
-    <div className="bg-white px-20 py-5 custom-border-radius shadow-lg my-6">
-      {(post.is_owner || currentUser.admin) && (
-        <div className="flex justify-end pr-10 space-x-2">
-          <button
-            onClick={handleEdit}
-            className="text-blue-500 hover:text-blue-700"
-          >
-            <i className="fas fa-pencil-alt fa-lg mx-4"></i> {/* Edit Icon */}
-          </button>
-          <button
-            onClick={handleDelete}
-            className="text-red-500 hover:text-red-700"
-          >
-            <i className="fas fa-trash-alt m-4"></i> {/* Delete Icon */}
-          </button>
-        </div>
-      )}
-      <h1 className="text-3xl font-extrabold mb-3">{post.title}</h1>
+    <div className="bg-white px-20 pt-5 pb-10 custom-border-radius shadow-lg my-6">
+      <div className="flex justify-end space-x-2">
+        {post.is_owner || currentUser.admin ? (
+          <>
+            <button
+              onClick={handleEdit}
+              className="text-blue-500 hover:text-blue-700"
+            >
+              <i className="fas fa-pencil-alt fa-lg mx-4"></i> {/* Edit Icon */}
+            </button>
+            <button
+              onClick={handleDelete}
+              className="text-red-500 hover:text-red-700"
+            >
+              <i className="fas fa-trash-alt m-4"></i> {/* Delete Icon */}
+            </button>
+          </>
+        ) : (
+          <>
+            <div className="invisible">
+              <i className="fas fa-pencil-alt fa-lg mx-4"></i>{" "}
+              {/* Invisible Edit Icon */}
+            </div>
+            <div className="invisible">
+              <i className="fas fa-trash-alt m-4"></i>{" "}
+              {/* Invisible Delete Icon */}
+            </div>
+          </>
+        )}
+      </div>
+
+      {/* <h1 className="text-3xl font-extrabold mb-3">{post.title}</h1>
       <h2 className="text-xl mb-1 pb-4">{post.post_type.type}</h2>
       <p className="mb-1">
         By: {post.author.user.first_name} {post.author.user.last_name}
       </p>
       <p className="mb-1">Date: {post.event_date || post.publication_date}</p>
+      <p className="mb-4">{post.content}</p> */}
+      <div className="flex justify-between items-center mb-3 mr-4">
+        <h1 className="text-3xl font-extrabold">{post.title}</h1>
+        <p className="text-gray-500 text-sm">
+          posted on: {post.publication_date}
+        </p>
+      </div>
+      <h2 className="text-xl mb-1 pb-4">{post.post_type.type}</h2>
+      {post.post_type.id === 3 && (
+        <p className="mb-1">Event date: {post.event_date}</p>
+      )}
+      <p className="mb-1">
+        By: {post.author.user.first_name} {post.author.user.last_name}
+      </p>
       <p className="mb-4">{post.content}</p>
 
       <div className="my-4">

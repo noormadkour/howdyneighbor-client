@@ -1,0 +1,75 @@
+.event-carousel {
+    position: relative; /* Set relative positioning for the navigation buttons to work */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    width: 100%; /* Set width to 100% of its parent */
+}
+
+.event-carousel .horizontal-scroll-container {
+    display: flex;
+    overflow-x: hidden;
+    width: 100%; /* This ensures the container doesn't overflow its parent */
+    padding: 10px 0;
+    position: relative; /* Set relative positioning for the navigation buttons to work */
+}
+
+.event-carousel .event-item {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-right: 15px;
+    padding: 10px;
+    cursor: pointer;
+    flex: 0 0 100%;
+    max-width: 100%; /* Ensures that each event takes full width */
+    transition: transform 0.5s ease;
+}
+
+.event-carousel .event-item:hover {
+    background-color: #e2e6ea;
+}
+
+.horizontal-scroll-container::-webkit-scrollbar {
+    display: none; /* Hide scrollbar for Chrome, Safari, and Opera */
+}
+
+.horizontal-scroll-container::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.horizontal-scroll-container::-webkit-scrollbar-thumb {
+    background: transparent;
+    border-radius: 20px;
+}
+
+.event-carousel .navigation-buttons {
+    display: flex;
+    justify-content: space-between;
+    position: absolute; /* Position the buttons absolutely within the carousel */
+    /* top: 50%; Center vertically */
+    bottom: -4rem;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+    pointer-events: none; /* This allows clicks to pass through to items below */
+}
+
+.event-carousel .navigation-buttons button {
+    pointer-events: auto; /* This re-enables click events for the buttons */
+    background: none;
+    border: none;
+    padding: 0 1rem; /* Add padding on the sides */
+    cursor: pointer;
+    color: #333; /* Change the color as per your design */
+}
+
+.event-carousel .navigation-buttons button:hover {
+    color: #555; /* Change the hover color as per your design */
+}
+
+/* Adjust button size and positioning as needed */
+.event-carousel .navigation-buttons i {
+    font-size: 1.5rem; /* Adjust the size of the arrow icons */
+}
