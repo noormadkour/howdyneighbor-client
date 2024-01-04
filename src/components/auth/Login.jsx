@@ -30,7 +30,7 @@ export const Login = ({ setUser }) => {
     <section className="login-container pt-[5%] pl-10 pr-10 flex items-center justify-center">
       <div className="form-div bg-white custom-border-radius p-8 min-h-[50vh] w-[50vw] flex items-center justify-center custom-shadow">
         <form className="flex flex-col w-3/4" onSubmit={handleLogin}>
-          <h1 className="text-2xl font-bold mb-4">Meowdy, Neighbor!</h1>
+          <h1 className="text-2xl font-bold mb-4">Howdy, Neighbor!</h1>
           <p className="text-lg mb-6">Please sign in</p>
 
           <div className="mb-4">

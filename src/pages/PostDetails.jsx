@@ -11,6 +11,7 @@ import {
 } from "../services/postService";
 import { EditPost } from "../components/forms/EditPostForm";
 
+
 export const PostDetails = ({ currentUser }) => {
   const navigate = useNavigate();
   const [post, setPost] = useState(null);
@@ -29,6 +30,19 @@ export const PostDetails = ({ currentUser }) => {
     );
     setComments(filteredComments);
   };
+
+  const formatDate = (dateString) => {
+    const [year, month, day] = dateString.split("-").map(Number);
+    const date = new Date(year, month - 1, day); // Months are 0-indexed in JavaScript Date
+    return date.toLocaleDateString();
+  };  
+
+  const formatLongDate = (dateString) => {
+    const [year, month, day] = dateString.split("-").map(Number);
+    const date = new Date(year, month - 1, day); // Months are 0-indexed in JavaScript Date
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    return date.toLocaleDateString(undefined, options);
+  };  
 
   useEffect(() => {
     getPostById(postId).then(setPost);
@@ -180,27 +194,20 @@ export const PostDetails = ({ currentUser }) => {
 
       {showDeleteDialog && <DeleteDialog />}
 
-      {/* <h1 className="text-3xl font-extrabold mb-3">{post.title}</h1>
-      <h2 className="text-xl mb-1 pb-4">{post.post_type.type}</h2>
-      <p className="mb-1">
-        By: {post.author.user.first_name} {post.author.user.last_name}
-      </p>
-      <p className="mb-1">Date: {post.event_date || post.publication_date}</p>
-      <p className="mb-4">{post.content}</p> */}
       <div className="flex justify-between items-center mb-3 mr-4">
         <h1 className="text-3xl font-extrabold">{post.title}</h1>
         <p className="text-gray-500 text-sm">
-          posted on: {post.publication_date}
+          Posted on: {formatDate(post.publication_date)}
         </p>
       </div>
       <h2 className="text-xl mb-1 pb-4">{post.post_type.type}</h2>
       {post.post_type.id === 3 && (
-        <p className="mb-1">Event date: {post.event_date}</p>
+        <p className="mb-1">Date: {formatLongDate(post.event_date)}</p>
       )}
       <p className="mb-1">
-        By: {post.author.user.first_name} {post.author.user.last_name}
+        Neighbor: {post.author.user.first_name} {post.author.user.last_name}
       </p>
-      <p className="mb-4">{post.content}</p>
+      <p className="my-8 ml-10 text-lg">{post.content}</p>
 
       <div className="my-4">
         <h2 className="font-bold text-xl mb-2">Categories</h2>

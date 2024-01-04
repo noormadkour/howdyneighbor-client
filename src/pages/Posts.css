@@ -1,0 +1,27 @@
+
+/* Hide scrollbar arrows for Chrome, Safari, and Opera */
+.posts-scrollbar::-webkit-scrollbar-button {
+    display: none;
+  }
+  
+  /* Style the scrollbar track (optional) */
+  .posts-scrollbar::-webkit-scrollbar-track {
+    /* Add styles for the track here, if needed */
+  }
+  
+  /* Style the scrollbar thumb */
+  .posts-scrollbar::-webkit-scrollbar-thumb {
+    background: grey; /* Replace with your desired color */
+    border-radius: 10px; /* Adjust as needed */
+  }
+  
+  /* Narrow the scrollbar */
+  .posts-scrollbar::-webkit-scrollbar {
+    width: 8px; /* Adjust the width as needed */
+  }
+  
+  /* Hide scrollbar for Firefox */
+  .posts-scrollbar {
+    scrollbar-width: thin; /* 'thin' or 'none' */
+  }
+  

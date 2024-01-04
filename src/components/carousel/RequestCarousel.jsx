@@ -35,15 +35,23 @@ export const RequestCarousel = () => {
     }
   }, [requests, isPaused]);
 
+  const formatDate = (dateString) => {
+    const [year, month, day] = dateString.split("-").map(Number);
+    const date = new Date(year, month - 1, day); // Months are 0-indexed in JavaScript Date
+    return date.toLocaleDateString();
+  }; 
+
   return (
-    <div className="bg-white m-2">
-      <div className="flex justify-between items-center mb-2 justify-around">
+    <div className="bg-white m-2 custom-shadow-2 rounded-lg ">
+      <div className="flex items-center justify-around">
         <h2 className="text-2xl font-bold p-2">Requests</h2>
+      </div>
+      <div className="ml-[88%]">
         <button onClick={() => setIsPaused(!isPaused)} className="text-xl">
-          <i className={isPaused ? "fas fa-play" : "fas fa-pause"}></i>
+          <i className={isPaused ? "fas fa-play text-green-400" : "fas fa-pause text-red-400"}></i>
         </button>
       </div>
-      <div className="request-carousel bg-white shadow-lg rounded-lg p-4 h-96 overflow-y-auto custom-scrollbar">
+      <div className="request-carousel bg-white p-4 h-96 overflow-y-auto custom-scrollbar rounded-lg">
         {requests.length > 0 ? (
           <ul
             className={
@@ -63,7 +71,7 @@ export const RequestCarousel = () => {
                 </p>
                 <p className="text-sm text-gray-500">
                   Posted on:{" "}
-                  {new Date(request.publication_date).toLocaleDateString()}
+                  {formatDate(request.publication_date)}
                 </p>
               </li>
             ))}
