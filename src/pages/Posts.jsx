@@ -39,7 +39,7 @@ export const Posts = () => {
 
   return (
     <main className="text-slate-900 pt-[0%] pl-10 pr-10 flex flex-col items-center justify-center">
-      <div className="bg-white/95 custom-border-radius pt-5 pb-10 px-20 min-h-[70vh] max-h-[85vh]  w-[90vw] flex flex-col items-center  custom-shadow ">
+      <div className="bg-white/[85%] custom-border-radius pt-5 pb-10 px-20 min-h-[70vh] max-h-[85vh]  w-[90vw] flex flex-col items-center  custom-shadow ">
         <h1 className="text-4xl mb-4">Posts</h1>
         <div className="flex justify-between w-full mb-4 pt-2 pb-6">
           <div>

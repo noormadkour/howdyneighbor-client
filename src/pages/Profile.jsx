@@ -36,7 +36,7 @@ export const Profile = ({ currentUser }) => {
 
   return (
     <div className="flex w-full my-6 -center">
-      <div className=" flex flex-col w-1/4 custom-border-radius bg-white/95 mx-10 p-10 custom-shadow h-[400px] items-center">
+      <div className=" flex flex-col w-1/4 custom-border-radius bg-white/[85%] mx-10 p-10 custom-shadow h-[400px] items-center">
         <img
           src={user.profile_image}
           alt={`${user.full_name}'s profile`}
@@ -51,7 +51,7 @@ export const Profile = ({ currentUser }) => {
         </a>
       </div>
 
-      <div className="flex-3 p-8 bg-white/95 rounded-lg shadow-lg flex custom-shadow max-h-[100vh]">
+      <div className="flex-3 p-8 bg-white/[85%] rounded-lg shadow-lg flex custom-shadow max-h-[100vh]">
         <div className="w-1/2 pr-4">
           <h2 className="text-2xl font-bold mb-4">Posts</h2>
           <div className="posts-scrollbar overflow-y-auto max-h-[60vh]">

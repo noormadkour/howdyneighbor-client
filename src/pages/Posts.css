@@ -11,7 +11,7 @@
   
   /* Style the scrollbar thumb */
   .posts-scrollbar::-webkit-scrollbar-thumb {
-    background: grey; /* Replace with your desired color */
+    background: rgb(186, 186, 186); /* Replace with your desired color */
     border-radius: 10px; /* Adjust as needed */
   }
   

@@ -9,6 +9,7 @@ import {
   editPostType,
   deletePostType,
 } from "../services/typesAndCats";
+import "./Posts.css"
 
 export const Settings = ({ currentUser }) => {
   const [postTypes, setPostTypes] = useState([]);
@@ -82,181 +83,193 @@ export const Settings = ({ currentUser }) => {
   };
 
   return (
-    <div className="p-8">
-      <div className="flex justify-between bg-white/95 rounded-lg">
-        <div className="w-1/2 p-4">
-          <h2 className="text-xl font-bold mb-2">Categories</h2>
-          <button
-            onClick={() => setShowCreateCategory(true)}
-            className="text-green-500 hover:text-green-700"
-          >
-            <i className="fas fa-plus-circle"></i> Create New
-          </button>
-          {categories.map((category) => (
-            <div
-              key={category.id}
-              className="flex justify-between items-center bg-green-100 p-2 rounded my-2 shadow-md"
-            >
-              <span>{category.label}</span>
-              {currentUser.admin && (
-                <div className="flex space-x-2">
-                  <button
-                    onClick={() => handleEditCategory(category)}
-                    className="text-blue-500 hover:text-blue-700"
+    <div className="flex justify-center min-h-[80vh]">
+      <div className="bg-white/[85%] custom-border-radius pt-5 px-20 min-h-[70vh] max-h-[80vh]  w-[90vw] flex flex-col items-center custom-shadow ">
+        <h1 className="text-4xl mb-4">Settings</h1>
+        <div className="flex w-full justify-around">
+          <div className="w-1/2 p-4 m-4">
+            <div className="bg-white custom-shadow-2 rounded-lg p-6 ">
+              <h2 className="text-xl font-bold mb-2">Categories</h2>
+              <button
+                onClick={() => setShowCreateCategory(true)}
+                className="text-green-500 hover:text-green-700"
+              >
+                <i className="fas fa-plus-circle"></i> Create New
+              </button>
+              <div className="posts-scrollbar overflow-y-auto  max-h-[50vh]">
+                {categories.map((category) => (
+                  <div
+                    key={category.id}
+                    className="flex justify-between items-center bg-green-100 py-3 px-5 rounded my-3 shadow-md"
                   >
-                    <i className="fas fa-edit"></i>
-                  </button>
-                  <button
-                    onClick={() => handleDeleteCategory(category.id)}
-                    className="text-red-500 hover:text-red-700"
-                  >
-                    <i className="fas fa-trash-alt"></i>
-                  </button>
+                    <span>{category.label}</span>
+                    {currentUser.admin && (
+                      <div className="flex space-x-2">
+                        <button
+                          onClick={() => handleEditCategory(category)}
+                          className="text-blue-500 hover:text-blue-700"
+                        >
+                          <i className="fas fa-edit"></i>
+                        </button>
+                        <button
+                          onClick={() => handleDeleteCategory(category.id)}
+                          className="text-red-500 hover:text-red-700"
+                        >
+                          <i className="fas fa-trash-alt"></i>
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+              {showEditCategory && (
+                <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full">
+                  <div className="relative top-[40%] mx-auto p-5 border w-1/3 shadow-lg rounded-md bg-white">
+                    <form onSubmit={handleSaveEditCategory}>
+                      <input
+                        type="text"
+                        value={updatedCategoryName}
+                        onChange={(e) => setUpdatedCategoryName(e.target.value)}
+                        placeholder="Category"
+                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                      />
+                      <button
+                        type="submit"
+                        className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-2 mt-2"
+                      >
+                        Save Changes
+                      </button>
+                      <button
+                        onClick={() => setShowEditCategory(false)}
+                        className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mt-2"
+                      >
+                        Cancel
+                      </button>
+                    </form>
+                  </div>
+                </div>
+              )}
+              {showCreateCategory && (
+                <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full">
+                  <div className="relative top-[40%] mx-auto p-5 border w-1/3 shadow-lg rounded-md bg-white">
+                    <form onSubmit={handleCreateCategory}>
+                      <input
+                        type="text"
+                        value={newCategory}
+                        onChange={(e) => setNewCategory(e.target.value)}
+                        placeholder="Category"
+                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                      />
+                      <button
+                        type="submit"
+                        className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-2 mt-2"
+                      >
+                        Create
+                      </button>
+                      <button
+                        onClick={() => setShowCreateCategory(false)}
+                        className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mt-2"
+                      >
+                        Cancel
+                      </button>
+                    </form>
+                  </div>
                 </div>
               )}
             </div>
-          ))}
-          {showEditCategory && (
-            <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full">
-              <div className="relative top-20 mx-auto p-5 border w-1/3 shadow-lg rounded-md bg-white">
-                <form onSubmit={handleSaveEditCategory}>
-                  <input
-                    type="text"
-                    value={updatedCategoryName}
-                    onChange={(e) => setUpdatedCategoryName(e.target.value)}
-                    placeholder="Category"
-                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  />
-                  <button
-                    type="submit"
-                    className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-2 mt-2"
+          </div>
+
+          <div className="w-1/2 p-4 m-4">
+            <div className="bg-white custom-shadow-2 rounded-lg p-6">
+              <h2 className="text-xl font-bold mb-2">Post Types</h2>
+              <button
+                onClick={() => setShowCreatePostType(true)}
+                className="text-green-500 hover:text-green-700"
+              >
+                <i className="fas fa-plus-circle"></i> Create New
+              </button>
+              <div className="posts-scrollbar overflow-y-auto max-h-[50vh]">
+                {postTypes.map((postType) => (
+                  <div
+                    key={postType.id}
+                    className="flex justify-between items-center bg-green-100 py-3 px-5 rounded my-3 shadow-md"
                   >
-                    Save Changes
-                  </button>
-                  <button
-                    onClick={() => setShowEditCategory(false)}
-                    className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mt-2"
-                  >
-                    Cancel
-                  </button>
-                </form>
+                    <span>{postType.type}</span>
+                    {currentUser.admin && (
+                      <div className="flex space-x-2">
+                        <button
+                          onClick={() => handleEditPostType(postType)}
+                          className="text-blue-500 hover:text-blue-700"
+                        >
+                          <i className="fas fa-edit"></i>
+                        </button>
+                        <button
+                          onClick={() => handleDeletePostType(postType.id)}
+                          className="text-red-500 hover:text-red-700"
+                        >
+                          <i className="fas fa-trash-alt"></i>
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                ))}
               </div>
-            </div>
-          )}
-          {showCreateCategory && (
-            <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full">
-              <div className="relative top-20 mx-auto p-5 border w-1/3 shadow-lg rounded-md bg-white">
-                <form onSubmit={handleCreateCategory}>
-                  <input
-                    type="text"
-                    value={newCategory}
-                    onChange={(e) => setNewCategory(e.target.value)}
-                    placeholder="Category"
-                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  />
-                  <button
-                    type="submit"
-                    className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-2 mt-2"
-                  >
-                    Create
-                  </button>
-                  <button
-                    onClick={() => setShowCreateCategory(false)}
-                    className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mt-2"
-                  >
-                    Cancel
-                  </button>
-                </form>
-              </div>
-            </div>
-          )}
-        </div>
-        <div className="w-1/2 p-4">
-          <h2 className="text-xl font-bold mb-2">Post Types</h2>
-          <button
-            onClick={() => setShowCreatePostType(true)}
-            className="text-green-500 hover:text-green-700"
-          >
-            <i className="fas fa-plus-circle"></i> Create New
-          </button>
-          {postTypes.map((postType) => (
-            <div
-              key={postType.id}
-              className="flex justify-between items-center bg-green-100 p-2 rounded my-2 shadow-md"
-            >
-              <span>{postType.type}</span>
-              {currentUser.admin && (
-                <div className="flex space-x-2">
-                  <button
-                    onClick={() => handleEditPostType(postType)}
-                    className="text-blue-500 hover:text-blue-700"
-                  >
-                    <i className="fas fa-edit"></i>
-                  </button>
-                  <button
-                    onClick={() => handleDeletePostType(postType.id)}
-                    className="text-red-500 hover:text-red-700"
-                  >
-                    <i className="fas fa-trash-alt"></i>
-                  </button>
+              {showEditPostType && (
+                <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full">
+                  <div className="relative top-[40%] mx-auto p-5 border w-1/3 shadow-lg rounded-md bg-white">
+                    <form onSubmit={handleSaveEditPostType}>
+                      <input
+                        type="text"
+                        value={updatedPostTypeName}
+                        onChange={(e) => setUpdatedPostTypeName(e.target.value)}
+                        placeholder="Post Type"
+                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                      />
+                      <button
+                        type="submit"
+                        className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-2 mt-2"
+                      >
+                        Save Changes
+                      </button>
+                      <button
+                        onClick={() => setShowEditPostType(false)}
+                        className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mt-2"
+                      >
+                        Cancel
+                      </button>
+                    </form>
+                  </div>
+                </div>
+              )}
+              {showCreatePostType && (
+                <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full">
+                  <div className="relative top-[40%] mx-auto p-5 border w-1/3 shadow-lg rounded-md bg-white">
+                    <form onSubmit={handleCreatePostType}>
+                      <input
+                        type="text"
+                        value={newPostType}
+                        onChange={(e) => setNewPostType(e.target.value)}
+                        placeholder="Post Type"
+                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                      />
+                      <button
+                        type="submit"
+                        className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-2 mt-2"
+                      >
+                        Create
+                      </button>
+                      <button
+                        onClick={() => setShowCreatePostType(false)}
+                        className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mt-2"
+                      >
+                        Cancel
+                      </button>
+                    </form>
+                  </div>
                 </div>
               )}
             </div>
-          ))}
-          {showEditPostType && (
-            <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full">
-              <div className="relative top-20 mx-auto p-5 border w-1/3 shadow-lg rounded-md bg-white">
-                <form onSubmit={handleSaveEditPostType}>
-                  <input
-                    type="text"
-                    value={updatedPostTypeName}
-                    onChange={(e) => setUpdatedPostTypeName(e.target.value)}
-                    placeholder="Post Type"
-                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  />
-                  <button
-                    type="submit"
-                    className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-2 mt-2"
-                  >
-                    Save Changes
-                  </button>
-                  <button
-                    onClick={() => setShowEditPostType(false)}
-                    className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mt-2"
-                  >
-                    Cancel
-                  </button>
-                </form>
-              </div>
-            </div>
-          )}
-          {showCreatePostType && (
-            <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full">
-              <div className="relative top-20 mx-auto p-5 border w-1/3 shadow-lg rounded-md bg-white">
-                <form onSubmit={handleCreatePostType}>
-                  <input
-                    type="text"
-                    value={newPostType}
-                    onChange={(e) => setNewPostType(e.target.value)}
-                    placeholder="Post Type"
-                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  />
-                  <button
-                    type="submit"
-                    className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-2 mt-2"
-                  >
-                    Create
-                  </button>
-                  <button
-                    onClick={() => setShowCreatePostType(false)}
-                    className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mt-2"
-                  >
-                    Cancel
-                  </button>
-                </form>
-              </div>
-            </div>
-          )}
+          </div>
         </div>
       </div>
     </div>

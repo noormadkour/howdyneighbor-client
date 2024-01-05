@@ -161,7 +161,7 @@ export const PostDetails = ({ currentUser }) => {
   
 
   return (
-    <div className="bg-white px-20 pt-5 pb-10 custom-border-radius shadow-lg my-6">
+    <div className="bg-white/[85%] px-20 pt-5 pb-10 custom-border-radius shadow-lg my-6 mx-[20%]">
       <div className="flex justify-end space-x-2">
         {post.is_owner || currentUser.admin ? (
           <>
