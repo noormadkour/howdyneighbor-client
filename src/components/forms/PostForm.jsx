@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { getPostTypes, getCategories } from "../../services/typesAndCats";
 
-export const PostForm = () => {
-  const navigate = useNavigate();
+export const PostForm = ({ onPostAdded, onCancel }) => {
   const [postTypes, setPostTypes] = useState([]);
   const [categories, setCategories] = useState([]);
   const [chosenCategories, updateChosenCategories] = useState(new Set());
@@ -76,9 +74,7 @@ export const PostForm = () => {
         requestOptions
       );
       if (response.ok) {
-        // const responseData = await response.json();
-        // Handle successful response, e.g., navigate to a different page or show success message
-        navigate(-1);
+        onPostAdded();
       } else {
         const errorResponse = await response.json();
         console.error("Error submitting post:", errorResponse);
@@ -199,7 +195,7 @@ export const PostForm = () => {
             </button>
             <button
               className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-              onClick={() => navigate(-1)}
+              onClick={onCancel}
             >
               Cancel
             </button>

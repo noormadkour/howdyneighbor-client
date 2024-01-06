@@ -1,0 +1,50 @@
+.request-carousel ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+}
+
+.request-carousel li {
+    opacity: 1;
+    transition: opacity 0.5s ease, height 0.5s ease;
+    height: auto; /* Adjust according to your item height */
+    overflow: hidden;
+}
+
+.request-carousel li.fade-out {
+    opacity: 0;
+    height: 0; /* Reduce the height to zero */
+    padding: 0; /* Optional: reduce padding to zero if necessary */
+    margin: 0; /* Optional: reduce margin to zero if necessary */
+}
+
+.request-carousel .carousel-item {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    margin-bottom: 10px;
+    transition: background-color 0.3s;
+}
+
+.request-carousel .carousel-item:hover {
+    background-color: #e2e6ea;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+    width: 10px; /* Adjust scrollbar width */
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Track background */
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #888; /* Thumb color */
+    border-radius: 5px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #555; /* Thumb color on hover */
+}

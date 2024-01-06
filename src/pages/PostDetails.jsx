@@ -11,6 +11,7 @@ import {
 } from "../services/postService";
 import { EditPost } from "../components/forms/EditPostForm";
 
+
 export const PostDetails = ({ currentUser }) => {
   const navigate = useNavigate();
   const [post, setPost] = useState(null);
@@ -19,6 +20,7 @@ export const PostDetails = ({ currentUser }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editingCommentId, setEditingCommentId] = useState(null);
   const [editingContent, setEditingContent] = useState("");
+  const [showDeleteDialog, setShowDeleteDialog] = useState(false);
   const { postId } = useParams();
 
   const fetchComments = async () => {
@@ -28,6 +30,19 @@ export const PostDetails = ({ currentUser }) => {
     );
     setComments(filteredComments);
   };
+
+  const formatDate = (dateString) => {
+    const [year, month, day] = dateString.split("-").map(Number);
+    const date = new Date(year, month - 1, day); // Months are 0-indexed in JavaScript Date
+    return date.toLocaleDateString();
+  };  
+
+  const formatLongDate = (dateString) => {
+    const [year, month, day] = dateString.split("-").map(Number);
+    const date = new Date(year, month - 1, day); // Months are 0-indexed in JavaScript Date
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    return date.toLocaleDateString(undefined, options);
+  };  
 
   useEffect(() => {
     getPostById(postId).then(setPost);
@@ -76,21 +91,6 @@ export const PostDetails = ({ currentUser }) => {
     }
   };
 
-  const handleDelete = async () => {
-    const confirmDelete = window.confirm("Are you sure you want to delete this post?");
-    if (confirmDelete) {
-      try {
-        await deletePost(postId);
-        // After successful deletion, navigate back to the posts list or home page
-        navigate('/posts'); // Uncomment and use React Router's navigate
-        // Or trigger some state change to indicate that the post has been deleted
-      } catch (error) {
-        console.error("Error deleting post:", error);
-        // Handle error (e.g., show a message to the user)
-      }
-    }
-  };
-
   const handleEditCommentClick = (comment) => {
     setEditingCommentId(comment.id);
     setEditingContent(comment.content);
@@ -124,31 +124,90 @@ export const PostDetails = ({ currentUser }) => {
     return comment.is_owner || currentUser.admin;
   };
 
-  return (
-    <div className="bg-white px-20 py-5 custom-border-radius shadow-lg my-6">
-      {(post.is_owner || currentUser.admin) && (
-        <div className="flex justify-end pr-10 space-x-2">
-          <button
-            onClick={handleEdit}
-            className="text-blue-500 hover:text-blue-700"
-          >
-            <i className="fas fa-pencil-alt fa-lg mx-4"></i> {/* Edit Icon */}
+  const handleDelete = () => {
+    setShowDeleteDialog(true);
+  };
+
+  const confirmDelete = async () => {
+    try {
+      await deletePost(postId);
+      navigate("/posts");
+      setShowDeleteDialog(false);
+    } catch (error) {
+      console.error("Error deleting post:", error);
+    }
+  };
+  
+  const closeDeleteDialog = () => {
+    setShowDeleteDialog(false);
+  };
+
+  const DeleteDialog = () => (
+    <div className="fixed inset-0 bg-gray-600 bg-opacity-75 flex justify-center items-center">
+      <div className="bg-white p-6 rounded shadow-lg">
+        <h3 className="text-lg font-bold mb-4">Confirm Deletion</h3>
+        <p>Are you sure you want to delete this post?</p>
+        <div className="mt-4 flex justify-end space-x-2">
+          <button onClick={confirmDelete} className="bg-red-500 hover:bg-red-700 text-white py-2 px-4 rounded">
+            Delete
           </button>
-          <button
-            onClick={handleDelete}
-            className="text-red-500 hover:text-red-700"
-          >
-            <i className="fas fa-trash-alt m-4"></i> {/* Delete Icon */}
+          <button onClick={closeDeleteDialog} className="bg-gray-500 hover:bg-gray-700 text-white py-2 px-4 rounded">
+            Cancel
           </button>
         </div>
-      )}
-      <h1 className="text-3xl font-extrabold mb-3">{post.title}</h1>
+      </div>
+    </div>
+  );
+  
+
+  return (
+    <div className="bg-white px-20 pt-5 pb-10 custom-border-radius shadow-lg my-6">
+      <div className="flex justify-end space-x-2">
+        {post.is_owner || currentUser.admin ? (
+          <>
+            <button
+              onClick={handleEdit}
+              className="text-blue-500 hover:text-blue-700"
+            >
+              <i className="fas fa-pencil-alt fa-lg mx-4"></i> {/* Edit Icon */}
+            </button>
+            <button
+              onClick={handleDelete}
+              className="text-red-500 hover:text-red-700"
+            >
+              <i className="fas fa-trash-alt m-4"></i> {/* Delete Icon */}
+            </button>
+          </>
+        ) : (
+          <>
+            <div className="invisible">
+              <i className="fas fa-pencil-alt fa-lg mx-4"></i>{" "}
+              {/* Invisible Edit Icon */}
+            </div>
+            <div className="invisible">
+              <i className="fas fa-trash-alt m-4"></i>{" "}
+              {/* Invisible Delete Icon */}
+            </div>
+          </>
+        )}
+      </div>
+
+      {showDeleteDialog && <DeleteDialog />}
+
+      <div className="flex justify-between items-center mb-3 mr-4">
+        <h1 className="text-3xl font-extrabold">{post.title}</h1>
+        <p className="text-gray-500 text-sm">
+          Posted on: {formatDate(post.publication_date)}
+        </p>
+      </div>
       <h2 className="text-xl mb-1 pb-4">{post.post_type.type}</h2>
+      {post.post_type.id === 3 && (
+        <p className="mb-1">Date: {formatLongDate(post.event_date)}</p>
+      )}
       <p className="mb-1">
-        By: {post.author.user.first_name} {post.author.user.last_name}
+        Neighbor: {post.author.user.first_name} {post.author.user.last_name}
       </p>
-      <p className="mb-1">Date: {post.event_date || post.publication_date}</p>
-      <p className="mb-4">{post.content}</p>
+      <p className="my-8 ml-10 text-lg">{post.content}</p>
 
       <div className="my-4">
         <h2 className="font-bold text-xl mb-2">Categories</h2>

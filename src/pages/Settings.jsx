@@ -83,7 +83,7 @@ export const Settings = ({ currentUser }) => {
 
   return (
     <div className="p-8">
-      <div className="flex justify-between">
+      <div className="flex justify-between bg-white/95 rounded-lg">
         <div className="w-1/2 p-4">
           <h2 className="text-xl font-bold mb-2">Categories</h2>
           <button
@@ -95,7 +95,7 @@ export const Settings = ({ currentUser }) => {
           {categories.map((category) => (
             <div
               key={category.id}
-              className="flex justify-between items-center bg-gray-100 p-2 rounded my-2"
+              className="flex justify-between items-center bg-green-100 p-2 rounded my-2 shadow-md"
             >
               <span>{category.label}</span>
               {currentUser.admin && (
@@ -182,7 +182,7 @@ export const Settings = ({ currentUser }) => {
           {postTypes.map((postType) => (
             <div
               key={postType.id}
-              className="flex justify-between items-center bg-gray-100 p-2 rounded my-2"
+              className="flex justify-between items-center bg-green-100 p-2 rounded my-2 shadow-md"
             >
               <span>{postType.type}</span>
               {currentUser.admin && (

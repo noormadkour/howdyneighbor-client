@@ -13,6 +13,7 @@ export const getPosts = () => {
 };
 
 export const updatePost = (updatedPost) => {
+  console.log(updatedPost)
   const currentUser = JSON.parse(localStorage.getItem("current_user"));
 
   if (currentUser && currentUser.token) {

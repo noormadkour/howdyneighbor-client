@@ -1,32 +1,36 @@
 import { useState, useEffect } from "react";
 // import { updatePost } from "../../services/postService";
-import { getCategories } from "../../services/typesAndCats";
+import { getCategories, getPostTypes } from "../../services/typesAndCats";
 
 export const EditPost = ({ post, onSave, onClose }) => {
   const [editedPost, setEditedPost] = useState(post);
+  const [selectedPostTypeId, setSelectedPostTypeId] = useState(post.post_type.id);
   const [categories, setCategories] = useState([]);
+  const [postTypes, setPostTypes] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState(
     new Set(post.categories.map((c) => c.id))
   );
+  const EVENT_POST_TYPE_ID = 3
 
   useEffect(() => {
     setEditedPost(post);
     getCategories().then(setCategories);
+    getPostTypes().then(setPostTypes);
+    setSelectedPostTypeId(post.post_type.id);
     setSelectedCategories(new Set(post.categories.map((c) => c.id)));
   }, [post]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setEditedPost({ ...editedPost, [name]: value });
+    if (name === 'post_type') {
+      setSelectedPostTypeId(parseInt(value));
+    }
   };
 
   const handleCategoryChange = (categoryId) => {
     const newSelectedCategories = new Set(selectedCategories);
-    if (newSelectedCategories.has(categoryId)) {
-      newSelectedCategories.delete(categoryId);
-    } else {
-      newSelectedCategories.add(categoryId);
-    }
+    newSelectedCategories.has(categoryId) ? newSelectedCategories.delete(categoryId) : newSelectedCategories.add(categoryId);
     setSelectedCategories(newSelectedCategories);
   };
 
@@ -34,7 +38,7 @@ export const EditPost = ({ post, onSave, onClose }) => {
     e.preventDefault(); 
     const updatedPost = {
       id: editedPost.id,
-      post_type: editedPost.post_type.id,
+      post_type: selectedPostTypeId,
       title: editedPost.title,
       event_date: editedPost.event_date,
       image_url: editedPost.image_url,
@@ -42,7 +46,6 @@ export const EditPost = ({ post, onSave, onClose }) => {
       approved: editedPost.approved,
       categories: Array.from(selectedCategories),
     };
-    console.log(updatedPost)
     onSave(updatedPost);
   };
 
@@ -64,6 +67,37 @@ export const EditPost = ({ post, onSave, onClose }) => {
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             />
           </div>
+
+          <div className="mb-4">
+            <label className="block text-gray-700 text-sm font-bold mb-2">Post Type</label>
+            <select
+              name="post_type"
+              value={selectedPostTypeId}
+              onChange={handleChange}
+              className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            >
+              {postTypes.map(pt => (
+                <option key={pt.id} value={pt.id}>
+                  {pt.type}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          {selectedPostTypeId === EVENT_POST_TYPE_ID && (
+          <div className="mb-4">
+            <label className="block text-gray-700 text-sm font-bold mb-2">
+              Event Date
+            </label>
+            <input
+              type="date"
+              name="event_date"
+              value={editedPost.event_date || ''}
+              onChange={handleChange}
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            />
+          </div>
+        )}
 
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2">
