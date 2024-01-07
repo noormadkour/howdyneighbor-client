@@ -9,7 +9,7 @@ import {
   editPostType,
   deletePostType,
 } from "../services/typesAndCats";
-import "./Posts.css"
+import "./Posts.css";
 
 export const Settings = ({ currentUser }) => {
   const [postTypes, setPostTypes] = useState([]);
@@ -89,13 +89,15 @@ export const Settings = ({ currentUser }) => {
         <div className="flex w-full justify-around">
           <div className="w-1/2 p-4 m-4">
             <div className="bg-white custom-shadow-2 rounded-lg p-6 ">
-              <h2 className="text-xl font-bold mb-2 mx-[40%]">Categories</h2>
-              <button
-                onClick={() => setShowCreateCategory(true)}
-                className="text-green-500 hover:text-green-700 pb-2 pl-2"
-              >
-                <i className="fas fa-plus-circle"></i> Create New
-              </button>
+              <div className="flex justify-between items-center mb-2">
+                <h2 className="text-xl font-bold flex-1">Categories</h2>
+                <button
+                  onClick={() => setShowCreateCategory(true)}
+                  className="text-green-500 hover:text-green-700 pb-2 pl-2"
+                >
+                  <i className="fas fa-plus-circle"></i> Add
+                </button>
+              </div>
               <div className="posts-scrollbar overflow-y-auto  max-h-[50vh]">
                 {categories.map((category) => (
                   <div
@@ -151,27 +153,32 @@ export const Settings = ({ currentUser }) => {
               )}
               {showCreateCategory && (
                 <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full">
-                  <div className="relative top-[40%] mx-auto p-5 border w-1/3 shadow-lg rounded-md bg-white">
-                    <form onSubmit={handleCreateCategory}>
+                  <div className="relative top-1/4 mx-auto p-5 custom-shadow border w-1/3 shadow-lg rounded-md bg-white flex flex-col items-center">
+                    <h2 className="text-xl font-bold mb-4">
+                      Create New Category
+                    </h2>
+                    <form onSubmit={handleCreateCategory} className="w-full">
                       <input
                         type="text"
                         value={newCategory}
                         onChange={(e) => setNewCategory(e.target.value)}
                         placeholder="Category"
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-4"
                       />
-                      <button
-                        type="submit"
-                        className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-2 mt-2"
-                      >
-                        Create
-                      </button>
-                      <button
-                        onClick={() => setShowCreateCategory(false)}
-                        className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mt-2"
-                      >
-                        Cancel
-                      </button>
+                      <div className="flex justify-around">
+                        <button
+                          type="submit"
+                          className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+                        >
+                          Create
+                        </button>
+                        <button
+                          onClick={() => setShowCreateCategory(false)}
+                          className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
+                        >
+                          Cancel
+                        </button>
+                      </div>
                     </form>
                   </div>
                 </div>
@@ -181,13 +188,15 @@ export const Settings = ({ currentUser }) => {
 
           <div className="w-1/2 p-4 m-4">
             <div className="bg-white custom-shadow-2 rounded-lg p-6">
-              <h2 className="text-xl font-bold mb-2 mx-[40%] w-full">Post Types</h2>
-              <button
-                onClick={() => setShowCreatePostType(true)}
-                className="text-green-500 hover:text-green-700 pb-2  pl-2"
-              >
-                <i className="fas fa-plus-circle"></i> Create New
-              </button>
+              <div className="flex justify-between items-center mb-2">
+                <h2 className="text-xl font-bold flex-1">Post Types</h2>
+                <button
+                  onClick={() => setShowCreatePostType(true)}
+                  className="text-green-500 hover:text-green-700"
+                >
+                  <i className="fas fa-plus-circle"></i> Add
+                </button>
+              </div>
               <div className="posts-scrollbar overflow-y-auto max-h-[50vh]">
                 {postTypes.map((postType) => (
                   <div
@@ -243,27 +252,32 @@ export const Settings = ({ currentUser }) => {
               )}
               {showCreatePostType && (
                 <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full">
-                  <div className="relative top-[40%] mx-auto p-5 border w-1/3 shadow-lg rounded-md bg-white">
-                    <form onSubmit={handleCreatePostType}>
+                  <div className="relative top-1/4 mx-auto p-5 border w-1/3 custom-shadow rounded-md bg-white flex flex-col items-center">
+                    <h2 className="text-xl font-bold mb-4">
+                      Create New Post Type
+                    </h2>
+                    <form onSubmit={handleCreatePostType} className="w-full">
                       <input
                         type="text"
                         value={newPostType}
                         onChange={(e) => setNewPostType(e.target.value)}
                         placeholder="Post Type"
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-4"
                       />
-                      <button
-                        type="submit"
-                        className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-2 mt-2"
-                      >
-                        Create
-                      </button>
-                      <button
-                        onClick={() => setShowCreatePostType(false)}
-                        className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mt-2"
-                      >
-                        Cancel
-                      </button>
+                      <div className="flex justify-around">
+                        <button
+                          type="submit"
+                          className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+                        >
+                          Create
+                        </button>
+                        <button
+                          onClick={() => setShowCreatePostType(false)}
+                          className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
+                        >
+                          Cancel
+                        </button>
+                      </div>
                     </form>
                   </div>
                 </div>

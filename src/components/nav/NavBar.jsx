@@ -33,11 +33,15 @@ export const NavBar = () => {
   );
 
   return (
-    <nav className="bg-white/75 custom-shadow custom-border-radius py-4 px-6 m-3">
+    <nav className="bg-white/75 custom-shadow custom-border-radius py-4 px-6 m-2">
       <ul className="flex justify-around items-center">
         <li>
           <NavLink
-            className="text-gray-700 hover:text-purple-700 px-4 py-2 text-lg font-medium"
+            className={({ isActive }) =>
+            isActive
+              ? "text-gray-700 px-4 py-2 text-xl font-bold"
+              : "text-gray-700 hover:text-green-700 px-4 py-2 text-lg font-medium"
+          }
             to={"/"}
           >
             Home
@@ -45,7 +49,12 @@ export const NavBar = () => {
         </li>
         <li>
           <NavLink
-            className="text-gray-700 hover:text-purple-700 px-4 py-2 text-lg font-medium"
+            className={({ isActive }) =>
+            isActive
+              ? "text-gray-700 px-4 py-2 text-xl font-bold"
+              : "text-gray-700 hover:text-green-700 px-4 py-2 text-lg font-medium"
+          }
+            activeClassName="active-nav-link"
             to={"/posts"}
           >
             Posts
@@ -53,7 +62,11 @@ export const NavBar = () => {
         </li>
         <li>
           <NavLink
-            className="text-gray-700 hover:text-purple-700 px-4 py-2 text-lg font-medium"
+            className={({ isActive }) =>
+            isActive
+              ? "text-gray-700 px-4 py-2 text-xl font-bold"
+              : "text-gray-700 hover:text-green-700 px-4 py-2 text-lg font-medium"
+          }
             to={"/profile"}
           >
             Profile
@@ -61,7 +74,11 @@ export const NavBar = () => {
         </li>
         <li>
           <NavLink
-            className="text-gray-700 hover:text-purple-700 px-4 py-2 text-lg font-medium"
+            className={({ isActive }) =>
+            isActive
+              ? "text-gray-700 px-4 py-2 text-xl font-bold"
+              : "text-gray-700 hover:text-green-700 px-4 py-2 text-lg font-medium"
+          }
             to={"/settings"}
           >
             Settings
@@ -70,7 +87,7 @@ export const NavBar = () => {
         {localStorage.getItem("current_user") !== null && (
           <li>
             <button
-              className="text-gray-700 hover:text-purple-700 px-4 py-2 text-lg font-medium rounded-md"
+              className="text-gray-700 hover:text-red-700 px-4 py-2 text-lg font-medium rounded-md"
               onClick={() => setShowLogoutDialog(true)}
             >
               <i className="fas fa-sign-out-alt mr-2"></i>Logout
