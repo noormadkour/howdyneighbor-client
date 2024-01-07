@@ -84,15 +84,15 @@ export const Settings = ({ currentUser }) => {
 
   return (
     <div className="flex justify-center min-h-[80vh]">
-      <div className="bg-white/[85%] custom-border-radius pt-5 px-20 min-h-[70vh] max-h-[80vh]  w-[90vw] flex flex-col items-center custom-shadow ">
-        <h1 className="text-4xl mb-4">Settings</h1>
+      <div className="bg-white/[75%] custom-border-radius pt-5 px-20 min-h-[83vh] max-h-[100vh]  w-[90vw] flex flex-col items-center custom-shadow ">
+        <h1 className="font-bold text-5xl mb-4">Settings</h1>
         <div className="flex w-full justify-around">
           <div className="w-1/2 p-4 m-4">
             <div className="bg-white custom-shadow-2 rounded-lg p-6 ">
-              <h2 className="text-xl font-bold mb-2">Categories</h2>
+              <h2 className="text-xl font-bold mb-2 mx-[40%]">Categories</h2>
               <button
                 onClick={() => setShowCreateCategory(true)}
-                className="text-green-500 hover:text-green-700"
+                className="text-green-500 hover:text-green-700 pb-2 pl-2"
               >
                 <i className="fas fa-plus-circle"></i> Create New
               </button>
@@ -181,10 +181,10 @@ export const Settings = ({ currentUser }) => {
 
           <div className="w-1/2 p-4 m-4">
             <div className="bg-white custom-shadow-2 rounded-lg p-6">
-              <h2 className="text-xl font-bold mb-2">Post Types</h2>
+              <h2 className="text-xl font-bold mb-2 mx-[40%] w-full">Post Types</h2>
               <button
                 onClick={() => setShowCreatePostType(true)}
-                className="text-green-500 hover:text-green-700"
+                className="text-green-500 hover:text-green-700 pb-2  pl-2"
               >
                 <i className="fas fa-plus-circle"></i> Create New
               </button>

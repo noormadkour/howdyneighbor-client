@@ -43,7 +43,7 @@ export const Profile = ({ currentUser }) => {
           className="rounded-full shadow-lg mb-4 "
           style={{ width: "200px", height: "200px", objectFit: "cover" }}
         />
-        <h1 className="text-3xl font-bold">{user.full_name}</h1>
+        <h1 className="text-4xl font-bold">{user.full_name}</h1>
         <p className="text-md">{user.bio}</p>
         <p className="text-md">{user.address}</p>
         <a href={`mailto:${user.user.email}`} className="text-blue-500">

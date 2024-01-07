@@ -7,6 +7,8 @@
   /* Style the scrollbar track (optional) */
   .posts-scrollbar::-webkit-scrollbar-track {
     /* Add styles for the track here, if needed */
+    background: #f1f1f1; /* Track background */
+    border-radius: 10px;
   }
   
   /* Style the scrollbar thumb */

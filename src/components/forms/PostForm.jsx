@@ -89,7 +89,7 @@ export const PostForm = ({ onPostAdded, onCancel }) => {
     <di className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full">
       <div className="relative top-20 mx-auto p-5 w-[50%] shadow-lg custom-border-radius px-20 py-10 bg-white">
         <form className="space-y-4" onSubmit={handleSubmit}>
-          <h1 className="text-2xl font-bold text-center mb-6">New Post Form</h1>
+          <h2 className="text-2xl font-bold text-center mb-6">New Post Form</h2>
 
           <div>
             <label className="block text-md font-medium text-gray-700">

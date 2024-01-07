@@ -40,7 +40,7 @@ export const EventCarousel = () => {
 
   return (
     <div className="event-carousel bg-white custom-shadow-2 rounded-lg m-2 h-[96.5%]">
-      <h2 className="text-2xl font-bold mb-4">Upcoming Events</h2>
+      <h2 className="text-2xl font-bold mb-10">Upcoming Events</h2>
       <div className="horizontal-scroll-container">
         {events.length > 0 ? (
           events.map((event, index) => (

@@ -46,8 +46,8 @@ export const Register = ({ setUser }) => {
     <section className="login-container pt-[5%] pl-10 pr-10 flex items-center justify-center">
       <div className="form-div bg-white custom-border-radius p-8 min-h-[50vh] w-[50vw] flex items-center justify-center custom-shadow">
         <form className="flex flex-col w-2/3" onSubmit={handleRegister}>
-          <h1 className="text-2xl font-bold mb-4">Howdy, Neighbor-to-be!</h1>
-          <p className="text-lg mb-6">Create an account</p>
+          <h1 className="text-5xl font-bold my-5">Howdy, Neighbor-to-be!</h1>
+          <p className="text mb-6">Create an account</p>
 
           <div className="mb-4">
             <label className="block text-md font-medium text-gray-700 mb-2">

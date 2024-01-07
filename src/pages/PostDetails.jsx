@@ -144,9 +144,9 @@ export const PostDetails = ({ currentUser }) => {
 
   const DeleteDialog = () => (
     <div className="fixed inset-0 bg-gray-600 bg-opacity-75 flex justify-center items-center">
-      <div className="bg-white p-6 rounded shadow-lg">
+      <div className="bg-white p-20 custom-border-radius shadow-lg">
         <h3 className="text-lg font-bold mb-4">Confirm Deletion</h3>
-        <p>Are you sure you want to delete this post?</p>
+        <p className="p-4">Are you sure you want to delete this post?</p>
         <div className="mt-4 flex justify-end space-x-2">
           <button onClick={confirmDelete} className="bg-red-500 hover:bg-red-700 text-white py-2 px-4 rounded">
             Delete
@@ -157,11 +157,11 @@ export const PostDetails = ({ currentUser }) => {
         </div>
       </div>
     </div>
-  );
+  ); 
   
 
   return (
-    <div className="bg-white/[85%] px-20 pt-5 pb-10 custom-border-radius shadow-lg my-6 mx-[20%]">
+    <div className="bg-white/[85%] px-20 pt-5 pb-10 custom-border-radius shadow-lg mt-1 mx-[20%]">
       <div className="flex justify-end space-x-2">
         {post.is_owner || currentUser.admin ? (
           <>
@@ -195,7 +195,7 @@ export const PostDetails = ({ currentUser }) => {
       {showDeleteDialog && <DeleteDialog />}
 
       <div className="flex justify-between items-center mb-3 mr-4">
-        <h1 className="text-3xl font-extrabold">{post.title}</h1>
+        <h2 className="text-3xl font-extrabold">{post.title}</h2>
         <p className="text-gray-500 text-sm">
           Posted on: {formatDate(post.publication_date)}
         </p>
