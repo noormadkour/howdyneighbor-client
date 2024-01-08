@@ -211,7 +211,7 @@ export const PostDetails = ({ currentUser }) => {
       {post.post_type.id === 3 && (
         <p className="mb-1">Date: {formatLongDate(post.event_date)}</p>
       )}
-      <p className="bg-green-300/70 rounded-lg shadow-lg p-10 my-8 mx-10 text-[18px]">{post.content}</p>
+      <p className="bg-green-300/60 shadow-lg rounded-lg p-10 my-8 mx-10 text-[18px]">{post.content}</p>
 
       <div className="my-4">
         <h2 className="font-bold text-xl mb-2">Categories</h2>
@@ -264,12 +264,13 @@ export const PostDetails = ({ currentUser }) => {
               </div>
             ) : (
               // Normal comment display
-              <div className="flex flex-grow items-center my-2 p-2 rounded">
+              <div className="flex flex-grow items-center p-2 rounded">
                 <div className="flex flex-col items-center mr-4">
                   <img
                     src={comment.author.profile_image}
                     alt={`${comment.author.full_name}`}
-                    className="rounded-full w-10 h-10 mb-1" // Adjust size and margin as needed
+                    className="rounded-full mb-1"
+                    style={{ width: "2.5rem", height: "2.5rem", objectFit: "cover" }}
                   />
                   <p className="text-[10px] text-gray-600">
                     {comment.author.user.first_name}

@@ -48,6 +48,13 @@ body::before {
 }
 
 @layer utilities {
+  .custom-green-shadow {
+    box-shadow: 0px 0px 5px 1px rgba(134, 239, 173, 0.438);
+
+  }
+}
+
+@layer utilities {
   .custom-button-shadow {
     box-shadow: 0px 0px 10px rgb(23, 134, 1); /* Adjust the values as needed */
   }
