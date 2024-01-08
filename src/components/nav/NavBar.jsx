@@ -54,7 +54,6 @@ export const NavBar = () => {
               ? "text-gray-700 px-4 py-2 text-xl font-bold"
               : "text-gray-700 hover:text-green-700 px-4 py-2 text-lg font-medium"
           }
-            activeClassName="active-nav-link"
             to={"/posts"}
           >
             Posts

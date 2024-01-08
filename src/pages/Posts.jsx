@@ -177,8 +177,8 @@ export const Posts = () => {
               </Link>
             ))
           ) : (
-            <div className="font-bold text-center text-gray-600 pt-[10%]">
-              No posts to show
+            <div className="font-semibold text-center text-gray-600 pt-[10%]">
+              -- No posts to show --
             </div>
           )}
         </div>
