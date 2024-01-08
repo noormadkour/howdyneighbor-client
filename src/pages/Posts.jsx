@@ -133,7 +133,7 @@ export const Posts = () => {
                 key={post.id}
                 className="mb-4 block"
               >
-                <div className="mb-4 p-6 rounded-lg shadow-lg bg-green-100 hover:bg-green-200 transition duration-300">
+                <div className="mb-4 p-6 rounded-lg shadow-lg bg-green-100 hover:bg-green-200 transition duration-700">
                   {/* Header: Title and Author */}
                   <div className="flex justify-between">
                     <h2 className="text-xl font-bold">{post.title}</h2>

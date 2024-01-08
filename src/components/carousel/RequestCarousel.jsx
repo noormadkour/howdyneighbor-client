@@ -67,7 +67,7 @@ export const RequestCarousel = () => {
             {requests.map((request, index) => (
               <li
                 key={index}
-                className="mb-2 p-4 cursor-pointer rounded-lg bg-green-100 hover:bg-green-200 shadow transition duration-300 flex flex-col justify-between"
+                className="mb-2 p-4 cursor-pointer rounded-lg bg-green-100 hover:bg-green-200 transition duration-500 ease-in-out shadow flex flex-col justify-between"
                 onClick={() => navigate(`/posts/${request.id}`)}
               >
                 <div className="header flex justify-between mb-2">

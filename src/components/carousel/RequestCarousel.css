@@ -5,12 +5,12 @@
     overflow: hidden;
 }
 
-.request-carousel li {
+/* .request-carousel li {
     opacity: 1;
     transition: opacity 0.5s ease, height 0.5s ease;
-    height: auto; /* Adjust according to your item height */
+    height: auto; 
     overflow: hidden;
-}
+} */
 
 .request-carousel li.fade-out {
     opacity: 0;
@@ -19,14 +19,14 @@
     margin: 0; /* Optional: reduce margin to zero if necessary */
 }
 
-.request-carousel .carousel-item {
+/* .request-carousel .carousel-item {
     background-color: rgb(220 252 231 / var(--tw-bg-opacity));
     border-radius: 8px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
     padding: 10px;
     margin-bottom: 10px;
-    transition: background-color 0.3s;
-}
+    transition: background-color 0.7s;
+} */
 
 .request-carousel .carousel-item:hover {
     background-color: #e2e6ea;
