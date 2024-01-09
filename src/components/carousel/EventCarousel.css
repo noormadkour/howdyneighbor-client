@@ -17,17 +17,18 @@
 .event-carousel .event-item {
     scroll-snap-align: start;
     flex: 0 0 calc(100% / 3); /* Adjust the 3 to show more or fewer items at once */
-    background-color: #f8f9fa;
+    background-color: #eeeeee;
     border-radius: 8px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
     margin-right: 15px;
     padding: 10px;
     cursor: pointer;
-    transition: transform 0.5s ease; /* Smooth transition for other animations */
+    transition: background-color 0.5s ease, transform 0.5s ease;
 }
 
 .event-carousel .event-item:hover {
-    background-color: #e2e6ea;
+    transition-duration: 0.5s;
+    background-color: #dfdfdf;
 }
 
 .horizontal-scroll-container::-webkit-scrollbar {

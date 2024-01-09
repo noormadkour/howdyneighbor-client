@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { getPostTypes, getCategories } from "../../services/typesAndCats";
+import "./Form.css"
 
 export const PostForm = ({ onPostAdded, onCancel }) => {
   const [postTypes, setPostTypes] = useState([]);
@@ -85,10 +86,10 @@ export const PostForm = ({ onPostAdded, onCancel }) => {
   };
 
   return (
-    <main className="container mx-auto pt-10 flex justify-center">
-      <div className="bg-white custom-border-radius shadow-lg p-8 w-full max-w-xl">
+    <di className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full">
+      <div className="relative top-20 mx-auto p-5 w-[50%] shadow-lg custom-border-radius px-20 py-10 bg-white">
         <form className="space-y-4" onSubmit={handleSubmit}>
-          <h1 className="text-2xl font-bold text-center mb-6">New Post Form</h1>
+          <h2 className="text-2xl font-bold text-center mb-6">New Post Form</h2>
 
           <div>
             <label className="block text-md font-medium text-gray-700">
@@ -99,6 +100,7 @@ export const PostForm = ({ onPostAdded, onCancel }) => {
               id="post_type"
               onChange={updatePostType}
               value={post.post_type}
+              required
             >
               <option value={0}>Please select a Post Type</option>
               {postTypes.map((typeObj) => (
@@ -138,7 +140,7 @@ export const PostForm = ({ onPostAdded, onCancel }) => {
             />
           </div>
 
-          <div>
+          {/* <div>
             <label className="block text-md font-medium text-gray-700">
               Image URL
             </label>
@@ -149,7 +151,7 @@ export const PostForm = ({ onPostAdded, onCancel }) => {
               onChange={updatePost}
               value={post.image_url}
             />
-          </div>
+          </div> */}
 
           <div>
             <label className="block text-md font-medium text-gray-700">
@@ -172,17 +174,19 @@ export const PostForm = ({ onPostAdded, onCancel }) => {
             <label className="block text-md font-medium text-gray-700">
               Categories
             </label>
-            <div className="flex flex-wrap justify-between gap-2 mt-2">
-              {categories.map((c) => (
-                <label key={c.id} className="flex items-center space-x-2">
-                  <input
-                    type="checkbox"
-                    checked={chosenCategories.has(c.id)}
-                    onChange={() => handleChosenCategories(c)}
-                  />
-                  <span>{c.label}</span>
-                </label>
-              ))}
+            <div className="mt-2 max-h-40 overflow-y-auto border border-gray-300 rounded-md p-2 categories-scrollbar">
+              <div className="grid grid-cols-2 gap-2">
+                {categories.map((c) => (
+                  <label key={c.id} className="flex items-center space-x-2">
+                    <input
+                      type="checkbox"
+                      checked={chosenCategories.has(c.id)}
+                      onChange={() => handleChosenCategories(c)}
+                    />
+                    <span>{c.label}</span>
+                  </label>
+                ))}
+              </div>
             </div>
           </div>
 
@@ -202,6 +206,6 @@ export const PostForm = ({ onPostAdded, onCancel }) => {
           </div>
         </form>
       </div>
-    </main>
+    </di>
   );
 };

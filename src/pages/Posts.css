@@ -7,11 +7,13 @@
   /* Style the scrollbar track (optional) */
   .posts-scrollbar::-webkit-scrollbar-track {
     /* Add styles for the track here, if needed */
+    background: #f1f1f1; /* Track background */
+    border-radius: 10px;
   }
   
   /* Style the scrollbar thumb */
   .posts-scrollbar::-webkit-scrollbar-thumb {
-    background: grey; /* Replace with your desired color */
+    background: rgb(186, 186, 186); /* Replace with your desired color */
     border-radius: 10px; /* Adjust as needed */
   }
   

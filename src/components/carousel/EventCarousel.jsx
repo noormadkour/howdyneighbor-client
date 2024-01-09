@@ -20,10 +20,17 @@ export const EventCarousel = () => {
     });
   }, []);
 
-  const formatDate = (dateString) => {
+  // const formatDate = (dateString) => {
+  //   const [year, month, day] = dateString.split("-").map(Number);
+  //   const date = new Date(year, month - 1, day); // Months are 0-indexed in JavaScript Date
+  //   return date.toLocaleDateString();
+  // };
+
+  const formatLongDate = (dateString) => {
     const [year, month, day] = dateString.split("-").map(Number);
     const date = new Date(year, month - 1, day); // Months are 0-indexed in JavaScript Date
-    return date.toLocaleDateString();
+    const options = { year: "numeric", month: "long", day: "numeric" };
+    return date.toLocaleDateString(undefined, options);
   };
 
   const handleNext = () => {
@@ -40,27 +47,42 @@ export const EventCarousel = () => {
 
   return (
     <div className="event-carousel bg-white custom-shadow-2 rounded-lg m-2 h-[96.5%]">
-      <h2 className="text-2xl font-bold mb-4">Upcoming Events</h2>
+      <h2 className="text-2xl font-bold mb-10">Upcoming Events</h2>
       <div className="horizontal-scroll-container">
         {events.length > 0 ? (
           events.map((event, index) => (
             <>
               <div
                 key={index}
-                className="event-item flex flex-col p-3 h-[300px]"
+                className="event-item flex flex-col justify-between p-3 h-[300px]"
                 onClick={() => navigate(`/posts/${event.id}`)}
               >
-                <h3 className="text-xl font-bold m-2 self-center">
-                  {event.title}
-                </h3>
-                <p className="text-sm text-gray-600">
-                  Hosted by: {event.author.user.first_name}{" "}
-                  {event.author.user.last_name}
-                </p>
-                <p className="text-sm text-gray-500">
-                  Event on: {formatDate(event.event_date)}
-                </p>
-                <p className="text-gray-700">{event.content}</p>
+                {/* Header */}
+                <div className="header">
+                  <h3 className="text-xl font-bold text-center">
+                    {event.title}
+                  </h3>
+                  <p className="text-center text-sm">
+                    {formatLongDate(event.event_date)}
+                  </p>
+                </div>
+
+                {/* Body */}
+                <div className="body text-gray-700 mb-4">
+                  <p className="p-3 text-md">{event.content}</p>
+                </div>
+
+                {/* Footer */}
+                <div className="footer flex justify-between items-center text-sm text-gray-600">
+                  <p className="">
+                    Hosted by: {event.author.user.first_name}{" "}
+                    {event.author.user.last_name}
+                  </p>
+                  <div className="flex items-center">
+                    <i className="fas fa-comments text-gray-600 mr-1"></i>
+                    <span className="text-sm">{event.comments.length}</span>
+                  </div>
+                </div>
               </div>
               <div className="navigation-buttons">
                 <button onClick={handlePrevious} className="navigation-button">

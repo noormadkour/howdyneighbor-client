@@ -11,7 +11,6 @@ import {
 } from "../services/postService";
 import { EditPost } from "../components/forms/EditPostForm";
 
-
 export const PostDetails = ({ currentUser }) => {
   const navigate = useNavigate();
   const [post, setPost] = useState(null);
@@ -35,14 +34,14 @@ export const PostDetails = ({ currentUser }) => {
     const [year, month, day] = dateString.split("-").map(Number);
     const date = new Date(year, month - 1, day); // Months are 0-indexed in JavaScript Date
     return date.toLocaleDateString();
-  };  
+  };
 
   const formatLongDate = (dateString) => {
     const [year, month, day] = dateString.split("-").map(Number);
     const date = new Date(year, month - 1, day); // Months are 0-indexed in JavaScript Date
-    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    const options = { year: "numeric", month: "long", day: "numeric" };
     return date.toLocaleDateString(undefined, options);
-  };  
+  };
 
   useEffect(() => {
     getPostById(postId).then(setPost);
@@ -137,31 +136,36 @@ export const PostDetails = ({ currentUser }) => {
       console.error("Error deleting post:", error);
     }
   };
-  
+
   const closeDeleteDialog = () => {
     setShowDeleteDialog(false);
   };
 
   const DeleteDialog = () => (
     <div className="fixed inset-0 bg-gray-600 bg-opacity-75 flex justify-center items-center">
-      <div className="bg-white p-6 rounded shadow-lg">
+      <div className="bg-white p-20 custom-border-radius shadow-lg">
         <h3 className="text-lg font-bold mb-4">Confirm Deletion</h3>
-        <p>Are you sure you want to delete this post?</p>
+        <p className="p-4">Are you sure you want to delete this post?</p>
         <div className="mt-4 flex justify-end space-x-2">
-          <button onClick={confirmDelete} className="bg-red-500 hover:bg-red-700 text-white py-2 px-4 rounded">
+          <button
+            onClick={confirmDelete}
+            className="bg-red-500 hover:bg-red-700 text-white py-2 px-4 rounded"
+          >
             Delete
           </button>
-          <button onClick={closeDeleteDialog} className="bg-gray-500 hover:bg-gray-700 text-white py-2 px-4 rounded">
+          <button
+            onClick={closeDeleteDialog}
+            className="bg-gray-500 hover:bg-gray-700 text-white py-2 px-4 rounded"
+          >
             Cancel
           </button>
         </div>
       </div>
     </div>
   );
-  
 
   return (
-    <div className="bg-white px-20 pt-5 pb-10 custom-border-radius shadow-lg my-6">
+    <div className="bg-white/[85%] px-20 pt-5 pb-10 custom-border-radius shadow-lg mt-1 mx-[20%]">
       <div className="flex justify-end space-x-2">
         {post.is_owner || currentUser.admin ? (
           <>
@@ -195,19 +199,19 @@ export const PostDetails = ({ currentUser }) => {
       {showDeleteDialog && <DeleteDialog />}
 
       <div className="flex justify-between items-center mb-3 mr-4">
-        <h1 className="text-3xl font-extrabold">{post.title}</h1>
+        <h2 className="text-3xl font-extrabold">{post.title}</h2>
         <p className="text-gray-500 text-sm">
           Posted on: {formatDate(post.publication_date)}
         </p>
       </div>
-      <h2 className="text-xl mb-1 pb-4">{post.post_type.type}</h2>
+      <h2 className="text-xl mb-1">{post.post_type.type}</h2>
+      <p className="text-sm mb-1">
+        {post.author.user.first_name} {post.author.user.last_name}
+      </p>
       {post.post_type.id === 3 && (
         <p className="mb-1">Date: {formatLongDate(post.event_date)}</p>
       )}
-      <p className="mb-1">
-        Neighbor: {post.author.user.first_name} {post.author.user.last_name}
-      </p>
-      <p className="my-8 ml-10 text-lg">{post.content}</p>
+      <p className="bg-green-300/60 shadow-lg rounded-lg p-10 my-8 mx-10 text-[18px]">{post.content}</p>
 
       <div className="my-4">
         <h2 className="font-bold text-xl mb-2">Categories</h2>
@@ -235,7 +239,7 @@ export const PostDetails = ({ currentUser }) => {
         {comments.map((comment, index) => (
           <div
             key={index}
-            className="bg-gray-100 p-2 my-2 rounded flex justify-between"
+            className="bg-gray-100 p-2 my-2 rounded-lg shadow-md flex justify-between"
           >
             {editingCommentId === comment.id ? (
               // Edit mode
@@ -260,11 +264,21 @@ export const PostDetails = ({ currentUser }) => {
               </div>
             ) : (
               // Normal comment display
-              <div className="flex-grow">
-                <p>{comment.content}</p>
-                <p className="text-sm text-gray-600">
-                  by: {comment.author.full_name}
-                </p>
+              <div className="flex flex-grow items-center p-2 rounded">
+                <div className="flex flex-col items-center mr-4">
+                  <img
+                    src={comment.author.profile_image}
+                    alt={`${comment.author.full_name}`}
+                    className="rounded-full mb-1"
+                    style={{ width: "2.5rem", height: "2.5rem", objectFit: "cover" }}
+                  />
+                  <p className="text-[10px] text-gray-600">
+                    {comment.author.user.first_name}
+                  </p>
+                </div>
+                <div className="flex">
+                  <p className="">{comment.content}</p>
+                </div>
               </div>
             )}
             {canEditDeleteComment(comment) && (
@@ -304,28 +318,3 @@ export const PostDetails = ({ currentUser }) => {
     </div>
   );
 };
-
-// {comments.map((comment, index) => (
-//   <div
-//     key={index}
-//     className="bg-gray-100 p-2 my-2 rounded flex justify-between"
-//   >
-//     <div>
-//       <p>{comment.content}</p>
-//       <p className="text-sm text-gray-600">
-//         by: {comment.author.full_name}
-//       </p>
-//     </div>
-//     {canEditDeleteComment(comment) && (
-//       <div className="flex space-x-2">
-//         <button className="text-blue-500 hover:text-blue-700">
-//           <i className="fas fa-edit mx-4"></i> {/* Edit Icon */}
-//         </button>
-//         <button className="text-red-500 hover:text-red-700">
-//           <i className="fas fa-times fa-lg mx-4"></i>{" "}
-//           {/* Delete Icon */}
-//         </button>
-//       </div>
-//     )}
-//   </div>
-// ))}

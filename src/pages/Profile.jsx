@@ -36,26 +36,26 @@ export const Profile = ({ currentUser }) => {
 
   return (
     <div className="flex w-full my-6 -center">
-      <div className=" flex flex-col w-1/4 custom-border-radius bg-white/95 mx-10 p-10 custom-shadow h-[400px] items-center">
+      <div className=" flex flex-col w-1/4 custom-border-radius bg-white/[85%] mx-10 p-10 custom-shadow h-[400px] items-center">
         <img
           src={user.profile_image}
           alt={`${user.full_name}'s profile`}
           className="rounded-full shadow-lg mb-4 "
           style={{ width: "200px", height: "200px", objectFit: "cover" }}
         />
-        <h1 className="text-3xl font-bold">{user.full_name}</h1>
+        <h1 className="text-4xl font-bold">{user.full_name}</h1>
         <p className="text-md">{user.bio}</p>
         <p className="text-md">{user.address}</p>
         <a href={`mailto:${user.user.email}`} className="text-blue-500">
           {user.user.email}
         </a>
       </div>
-
-      <div className="flex-3 p-8 bg-white/95 rounded-lg shadow-lg flex custom-shadow max-h-[100vh]">
-        <div className="w-1/2 pr-4">
-          <h2 className="text-2xl font-bold mb-4">Posts</h2>
-          <div className="posts-scrollbar overflow-y-auto max-h-[60vh]">
-            {userPosts.map((post) => (
+      <div className="flex-grow p-8 mr-10 bg-white/[85%] rounded-lg shadow-lg flex custom-shadow">
+      <div className="w-1/2 pr-4">
+        <h2 className="text-2xl font-bold mb-4">Posts</h2>
+        <div className="posts-scrollbar overflow-y-auto h-[60vh]">
+          {userPosts.length > 0 ? (
+            userPosts.map((post) => (
               <Link
                 to={`/posts/${post.id}`}
                 key={post.id}
@@ -64,13 +64,20 @@ export const Profile = ({ currentUser }) => {
                 <h3 className="font-bold">{post.title}</h3>
                 <p>{post.content}</p>
               </Link>
-            ))}
-          </div>
+            ))
+          ) : (
+            <div className="mt-[30%] font-semibold text-center text-gray-600">
+              -- No posts to display --
+            </div>
+          )}
         </div>
-        <div className="w-1/2 pl-4">
-          <h2 className="text-2xl font-bold mb-4">Comments</h2>
-          <div className="posts-scrollbar overflow-y-auto max-h-[60vh]">
-            {userComments.map((comment, index) => (
+      </div>
+
+      <div className="w-1/2 pl-4">
+        <h2 className="text-2xl font-bold mb-4">Comments</h2>
+        <div className="posts-scrollbar overflow-y-auto h-[60vh]">
+          {userComments.length > 0 ? (
+            userComments.map((comment, index) => (
               <div
                 key={index}
                 className="bg-gray-100 p-2 my-2 rounded cursor-pointer shadow-md"
@@ -81,10 +88,15 @@ export const Profile = ({ currentUser }) => {
                   On post: {comment.post.title}
                 </p>
               </div>
-            ))}
-          </div>
+            ))
+          ) : (
+            <div className="mt-[30%] font-semibold text-center text-gray-600">
+              -- No comments to display --
+            </div>
+          )}
         </div>
       </div>
+    </div>
     </div>
   );
 };
