@@ -10,9 +10,9 @@ Howdy, Neighbor is a full-stack neighborhood social platform designed to foster 
 
 ## Wireframe & ERD
 
-[Figma Wireframe]([https://figma.com/link_to_wireframe](https://www.figma.com/file/KX9XxPpkNqEcCyTl4aUKGv/Howdy-Neighbor-Capstone-Wireframe?type=whiteboard&t=sF9xZh2BZdzOa6yo-6))
+[Figma Wireframe](https://www.figma.com/file/KX9XxPpkNqEcCyTl4aUKGv/Howdy-Neighbor-Capstone-Wireframe?type=whiteboard&t=sF9xZh2BZdzOa6yo-6)
 
-[DBDiagram ERD]([https://dbdiagram.io/link_to_ERD](https://dbdiagram.io/d/Howdy-Neighbor-656a4e7e56d8064ca0393e57))
+[DBDiagram ERD](https://dbdiagram.io/d/Howdy-Neighbor-656a4e7e56d8064ca0393e57)
 
 ## Description of the User Capabilities
 
