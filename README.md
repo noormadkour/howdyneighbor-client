@@ -4,6 +4,10 @@ Please note that the names Howdy, Neighbor and Howdy Neighbor may be used interc
 ## Description
 Howdy, Neighbor is a full-stack neighborhood social platform designed to foster community engagement and interaction. The application allows residents to share updates, events, requests, and more, enhancing neighborhood communication and support. Built with React and Tailwind CSS for the frontend and Django Rest Framework for the backend, it offers comprehensive CRUD functionality, secure user authentication, and a responsive design for optimal user experience.
 
+## Video Walkthrough
+
+[Loom Video Walkthrough](https://www.loom.com/share/7da6ecb480194c2396e03953ea3b7b5b?sid=5ffd1dd4-4221-4eb5-b013-8eaae6c0819c)
+
 ## Wireframe & ERD
 
 [Figma Wireframe]([https://figma.com/link_to_wireframe](https://www.figma.com/file/KX9XxPpkNqEcCyTl4aUKGv/Howdy-Neighbor-Capstone-Wireframe?type=whiteboard&t=sF9xZh2BZdzOa6yo-6))
